@@ -1,5 +1,5 @@
-class ProxyFactory {
-
+export class ProxyFactory {
+    
     static create(objeto, props, acao) {
 
         return new Proxy(objeto, {
@@ -30,3 +30,4 @@ class ProxyFactory {
         return typeof(func) == typeof(Function);
     }
 }
+

@@ -1,6 +1,22 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ListaNegociacoes = require('../models/ListaNegociacoes');
+
+var _Mensagem = require('../models/Mensagem');
+
+var _NegociacaoView = require('../view/NegociacaoView');
+
+var _MensagemView = require('../view/MensagemView');
+
+var _NegociacaoService = require('../services/NegociacaoService');
+
+var _DateHelper = require('../helpers/DateHelper');
+
+var _Bind = require('../helpers/Bind');
+
+var _Negociacao = require('../models/Negociacao');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -13,15 +29,15 @@ var NegociacaoController = function () {
         this._inputQuantidade = $("#quantidade");
         this._inputValor = $("#valor");
 
-        this._listaNegociacoes = new Bind(new ListaNegociacoes(), new NegociacoesView($('#negociacoesView')), 'adiciona', 'esvazia', 'ordena', 'inverteOrdem');
-        this._mensagem = new Bind(new Mensagem(), new MensagemView($('#mensagemView')), 'texto');
+        this._listaNegociacoes = new _Bind.Bind(new _ListaNegociacoes.ListaNegociacoes(), new NegociacoesView($('#negociacoesView')), 'adiciona', 'esvazia', 'ordena', 'inverteOrdem');
+        this._mensagem = new _Bind.Bind(new _Mensagem.Mensagem(), new _MensagemView.MensagemView($('#mensagemView')), 'texto');
         this._ordemAtual = '';
-        this._service = new NegociacaoService();
+        this._service = new _NegociacaoService.NegociacaoService();
         this._init();
     }
 
     _createClass(NegociacaoController, [{
-        key: "_init",
+        key: '_init',
         value: function _init() {
             var _this = this;
 
@@ -39,7 +55,7 @@ var NegociacaoController = function () {
             }, 3000);
         }
     }, {
-        key: "adiciona",
+        key: 'adiciona',
         value: function adiciona(event) {
             var _this2 = this;
 
@@ -56,7 +72,7 @@ var NegociacaoController = function () {
             });
         }
     }, {
-        key: "importaNegociacoes",
+        key: 'importaNegociacoes',
         value: function importaNegociacoes() {
             var _this3 = this;
 
@@ -70,7 +86,7 @@ var NegociacaoController = function () {
             });
         }
     }, {
-        key: "apaga",
+        key: 'apaga',
         value: function apaga() {
             var _this4 = this;
 
@@ -83,12 +99,12 @@ var NegociacaoController = function () {
             });
         }
     }, {
-        key: "_criaNegociacao",
+        key: '_criaNegociacao',
         value: function _criaNegociacao() {
-            return new Negociacao(DateHelper.textoParaData(this._inputData.value), parseInt(this._inputQuantidade.value), parseFloat(this._inputValor.value));
+            return new _Negociacao.Negociacao(_DateHelper.DateHelper.textoParaData(this._inputData.value), parseInt(this._inputQuantidade.value), parseFloat(this._inputValor.value));
         }
     }, {
-        key: "_limpaFormulario",
+        key: '_limpaFormulario',
         value: function _limpaFormulario() {
             this._inputData.value = '';
             this._inputQuantidade.value = 1;
@@ -96,7 +112,7 @@ var NegociacaoController = function () {
             this._inputData.focus();
         }
     }, {
-        key: "ordena",
+        key: 'ordena',
         value: function ordena(coluna) {
 
             if (this._ordemAtual == coluna) {
